@@ -3,7 +3,7 @@ import classes from './personDetail.module.css';
 import { useParams } from 'react-router-dom';
 
 const PersonDetail = () => {
-  const [currentPerson, setPerson] = useState(null);
+  const [currentPerson, setPerson] = useState();
   const [currentImages, setImages] = useState([]);
   const [pickImage, setPickImage] = useState(0);
   const { id } = useParams();
@@ -12,25 +12,6 @@ const PersonDetail = () => {
     getData();
     window.scrollTo(0, 0);
   }, []);
-
-  //adult:false
-  // also_known_as: []
-  // biography:""
-  // birthday:
-  // "1993-07-18"
-  // deathday:null
-  // gender:1
-  // homepage:"https://gcm.co.nz/artists/luciane-buchanan"
-  // id:1399806
-  // imdb_id:
-  // "nm4578161"
-  // known_for_department:
-  // "Acting"
-  // name:
-  // "Luciane Buchanan"
-  // place_of_birth:"New Zealand"
-  // popularity:140.249
-  // profile_path:"/4BVfv9HE6ZipHqZO8xDlkDFBWlN.jpg"
 
   const getData = () => {
     fetch(`https://api.themoviedb.org/3/person/${id}?api_key=5058efa201f4ad4fba59a8deb39502b3`)
@@ -51,7 +32,6 @@ const PersonDetail = () => {
     setPickImage(id);
   };
 
-  //   console.log(currentPerson.name)
 
   return (
     <div className={classes.wrapper}>
@@ -84,6 +64,7 @@ const PersonDetail = () => {
         {currentImages?.map((item, id) => (
           <div className={classes.frame}>
             <img
+            key={item}
               onClick={() => onClickSetImage(id)}
               src={`https://image.tmdb.org/t/p/original${item.file_path}`}
               width={50}

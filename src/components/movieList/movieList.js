@@ -19,7 +19,7 @@ const MovieList = ({ setNewTotalPages }) => {
 
   useEffect(() => {
     getData(searchValue);
-  }, [searchValue, `${searchValue !== '' ? currentPage : ''}`]);
+  }, [searchValue, `${searchValue === '' ? currentPage : ''}`]);
 
   const getData = useCallback(
     (searchValue) => {

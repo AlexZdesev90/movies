@@ -42,14 +42,14 @@ const Home = () => {
 
   const updateSearchValue = useCallback(
     debounce((value) => {
+      // dispatch({ type: CHANGE_SEARCH_VALUE, payload: value });
       dispatch({ type: CHANGE_SEARCH_VALUE, payload: value });
-      dispatch({ type: CHANGE_FILTERED_VALUE, payload: value });
     }, 500),
     [],
   );
 
   const onChangeSearchValue = (value) => {
-    dispatch({ type: CHANGE_SEARCH_VALUE, payload: value });
+    dispatch({ type: CHANGE_FILTERED_VALUE, payload: value });
     updateSearchValue(value);
   };
 
@@ -96,7 +96,7 @@ const Home = () => {
           ))}
         </Carousel>
         <div className={classes.handliers}>
-          <SearchBar searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} />
+          <SearchBar searchValue={filteredValue} onChangeSearchValue={onChangeSearchValue} />
           <DropDown filter={filter} onClickChanged={onClickChanged} />
         </div>
         <MovieList

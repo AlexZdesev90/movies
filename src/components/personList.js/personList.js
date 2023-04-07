@@ -9,24 +9,23 @@ const PersonList = ({ searchValue, currentPage, setNewTotalPages, popularPersons
     setPersonList(popularPersons);
   }, [popularPersons]);
 
+  
+  const queryString = (searchValue) => (searchValue !== '' ? `?query=${searchValue}&` : '?');
+  
+  const getData = (currentPage) => {
+    console.log("personlist")
+    fetch(`https://api.themoviedb.org/3/search/person${queryString(searchValue)}page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
+    )
+    .then((res) => res.json())
+    .then((data) => {
+      setPersonList(data.results);
+      setNewTotalPages(data.total_pages);
+    });
+  };
+  
   useEffect(() => {
     getData(currentPage);
   }, [currentPage, searchValue]);
-
-  const queryString = (searchValue) => (searchValue !== '' ? `?query=${searchValue}&` : '?');
-
-  const getData = (currentPage) => {
-    fetch(
-      `https://api.themoviedb.org/3/search/person${queryString(
-        searchValue,
-      )}page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setPersonList(data.results);
-        setNewTotalPages(data.total_pages);
-    });
-  };
 
   return (
     <div className={classes.person__list}>
