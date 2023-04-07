@@ -38,7 +38,7 @@ const Home = () => {
         dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
         dispatch({ type: SET_TOTAL_PAGES, payload: data.total_pages });
       });
-  }, [filter, `${searchValue === '' ? currentPage : ''}`]);
+  }, [filter, `${searchValue !== '' ? currentPage : ''}`]);
 
   const updateSearchValue = useCallback(
     debounce((value) => {
