@@ -1,0 +1,185 @@
+.movie {
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie__intro {
+  width: 100%;
+}
+
+.movie__backdrop {
+  width: 100%;
+}
+
+.movie__detail {
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 200px;
+  padding: 10px;
+}
+
+.movie__detailLeft {
+  /* margin-right: 10px; */
+}
+
+.movie__poster {
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.86) 0px 22px 40px 6px;
+  margin-top: 60px;
+  margin-right: 30px;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+
+.movie__detailRight {
+  color: white;
+  background-color: rgb(86, 4, 39);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 410px;
+  justify-content: space-between;
+}
+.movie__detailRightTop {
+  min-width: 280px;
+  margin: 10px;
+  text-align: center;
+}
+
+.movie__detailRightTop > div {
+  margin-bottom: 0.3rem;
+  padding: 2px;
+}
+
+.movie__name {
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.movie__voteCount {
+  margin-left: 1rem;
+}
+
+.movie__genres {
+  margin: 1rem 0;
+  text-align: center;
+  height: fit-content;
+  width: 100%;
+}
+
+.movie__genre {
+  padding: 0.5rem;
+  border-radius: 20px;
+  margin-right: 1.2rem;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.movie__detailRightBottom {
+  border-radius: 10px;
+  margin: 2rem 0;
+  flex: 0.8;
+  background-color: rgb(86, 4, 39);
+}
+
+.synopsisText {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.text {
+  text-align: justify;
+  padding: 10px;
+}
+
+.synopsisText > div:last-of-type {
+  margin-left: auto;
+}
+
+.movie__links {
+  position: relative;
+  bottom: 120px;
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+}
+
+.movie__heading {
+  font-size: 2.2rem;
+}
+
+.movie__Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 150px;
+  color: black;
+  font-weight: bold;
+}
+
+.movie__homeButton {
+  background-color: rgb(255, 0, 0);
+}
+
+.movie__imdbButton {
+  background-color: #f3ce13;
+}
+
+.newTab {
+  margin-left: 1.4rem;
+}
+
+.movie__production {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+}
+
+.movie__productionComapany {
+  width: 200px;
+  margin: 2rem;
+}
+
+.productionCompanyImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 800px) {
+  .movie__detail {
+    flex-direction: column;
+  }
+  .movie__detailRightBottom {
+    margin-top: 45px;
+  }
+  .movie__poster {
+    width: 250px;
+  }
+  .movie__genres {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .movie__detail {
+    flex-direction: column;
+  }
+}

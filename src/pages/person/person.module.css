@@ -1,0 +1,54 @@
+.personImage {
+  margin: 0 auto;
+  width: 30%;
+}
+
+.personImage__name {
+  font-size: 4rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.person__overlay {
+  position: absolute;
+  bottom: 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  background-image: linear-gradient(
+    45deg,
+    #ca4246 10%,
+    #e16541 10%,
+    #e16541 20%,
+    #f18f43 20%,
+    #ffd900 30%,
+    #586334 30%,
+    #a7bd61 40%,
+    #476098 40%,
+    #476098 50%,
+    #a7489b 50%,
+    #ca4246 60%,
+    #e16541 60%,
+    #e16541 70%,
+    #f18f43 70%,
+    #ffd900 80%,
+    #586334 80%,
+    #a7bd61 90%,
+    #476098 90%,
+    #476098 100%,
+    #a7489b 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+@media screen and (max-width: 900px) {
+  .personImage__name {
+    font-size: 1rem;
+  }
+}

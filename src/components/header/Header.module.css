@@ -1,0 +1,46 @@
+.header {
+    padding: .5rem 2.5rem;
+    align-items: center;
+    display: flex;
+    justify-content:space-between;
+    background-color: rgb(59, 5, 22);
+}
+
+.headerLeft, .headerRight {
+    display: flex;
+    align-items: center;
+
+}
+
+a > span{
+    margin: 0 30px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: white;
+    padding: 0.5rem;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+a > span:hover {
+    color: rgb(252, 0, 160);
+}
+
+.header__icon {
+    position:relative;
+    width: 80px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 100px;
+    border: 2px solid white;
+    transition: scale 0.3s ease;
+}
+
+.header__icon:hover {
+    scale: 1.1;
+}
+
+.user__avatar {
+    font-size: 2rem;
+}
+
