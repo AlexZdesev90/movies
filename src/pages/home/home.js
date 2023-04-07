@@ -60,7 +60,7 @@ const Home = () => {
   const onClickChanged = (value) => {
     dispatch({ type: SET_FILTER, payload: value });
     dispatch({ type: CHANGE_SEARCH_VALUE, payload: '' });
-    dispatch({ type: SET_FILTER, payload: '' });
+    dispatch({ type: CHANGE_FILTERED_VALUE, payload: '' });
   };
 
   return (

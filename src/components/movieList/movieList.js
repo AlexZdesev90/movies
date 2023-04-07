@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classes from './movieList.module.css';
 // import { useParams } from "react-router-dom"
 import Cards from '../card/card';
@@ -14,9 +14,10 @@ const MovieList = ({ searchValue, currentPage, setNewTotalPages, popularMovies }
 
   useEffect(() => {
     getData(searchValue);
-  }, [searchValue, currentPage]);
+  }, [searchValue, `${searchValue !== '' ? currentPage : ''}`]);
 
-  const getData = (searchValue) => {
+  const getData = useCallback((searchValue) => {
+    console.log('movielist')
     fetch(
       `https://api.themoviedb.org/3/search/movie${queryString(
         searchValue,
@@ -27,7 +28,7 @@ const MovieList = ({ searchValue, currentPage, setNewTotalPages, popularMovies }
         setMovieList(data.results);
         setNewTotalPages(data.total_pages);
       });
-  };
+  }, [`${searchValue !== '' ? currentPage : ''}`])
 
   return (
     <div className={classes.movie__list}>
