@@ -100,10 +100,10 @@ const Home = () => {
           <DropDown filter={filter} onClickChanged={onClickChanged} />
         </div>
         <MovieList
-          searchValue={filteredValue}
-          currentPage={currentPage}
+          // searchValue={filteredValue}
+          // currentPage={currentPage}
           setNewTotalPages={(num) => setNewTotalPages(num)}
-          popularMovies={movies}
+          // popularMovies={movies}
         />
         <Grid container justifyContent="center" sx={{ p: '2rem' }}>
           <Pagination

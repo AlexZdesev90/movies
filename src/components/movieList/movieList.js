@@ -1,14 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import classes from './movieList.module.css';
-// import { useParams } from "react-router-dom"
 import Cards from '../card/card';
+import { GET_POPULAR_MOVIES } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-const MovieList = ({ searchValue, currentPage, setNewTotalPages, popularMovies }) => {
-  const [movieList, setMovieList] = useState();
+const MovieList = ({ setNewTotalPages }) => {
+  const dispatch = useDispatch();
+
+  const movies = useSelector((state) => state.movies.movies);
+  const searchValue = useSelector((state) => state.movies.searchValue);
+  const currentPage = useSelector((state) => state.movies.currentPage);
 
   useEffect(() => {
-    setMovieList(popularMovies);
-  }, [popularMovies]);
+    dispatch({ type: GET_POPULAR_MOVIES, payload: movies });
+  }, []);
 
   const queryString = (searchValue) => (searchValue !== '' ? `?query=${searchValue}&` : '?');
 
@@ -16,25 +21,28 @@ const MovieList = ({ searchValue, currentPage, setNewTotalPages, popularMovies }
     getData(searchValue);
   }, [searchValue, `${searchValue !== '' ? currentPage : ''}`]);
 
-  const getData = useCallback((searchValue) => {
-    console.log('movielist')
-    fetch(
-      `https://api.themoviedb.org/3/search/movie${queryString(
-        searchValue,
-      )}page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setMovieList(data.results);
-        setNewTotalPages(data.total_pages);
-      });
-  }, [`${searchValue !== '' ? currentPage : ''}`])
+  const getData = useCallback(
+    (searchValue) => {
+      console.log('movielist');
+      fetch(
+        `https://api.themoviedb.org/3/search/movie${queryString(
+          searchValue,
+        )}page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
+          setNewTotalPages(data.total_pages);
+        });
+    },
+    [`${searchValue !== '' ? currentPage : ''}`],
+  );
 
   return (
     <div className={classes.movie__list}>
       <h2 className={classes.list__title}>MOVIES</h2>
       <div className={classes.list__cards}>
-        {movieList?.map((movie) => (
+        {movies?.map((movie) => (
           <Cards key={movie.id} movie={movie} />
         ))}
       </div>
