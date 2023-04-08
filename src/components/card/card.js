@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import classes from './card.module.css';
 import { Link } from 'react-router-dom';
+import ContentLoader from 'react-content-loader';
 
 const Cards = ({ movie }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,11 +15,16 @@ const Cards = ({ movie }) => {
   return (
     <>
       {isLoading ? (
-        <div className={classes.cards}>
-          <SkeletonTheme highlightColor="rgb(169, 165, 166)">
-            <Skeleton height={300} duration={2} />
-          </SkeletonTheme>
-        </div>
+        <ContentLoader
+          speed={1}
+          width={200}
+          height={300}
+          viewBox="0 0 220 320"
+          backgroundColor="#850840"
+          foregroundColor="#300404"
+        >
+          <rect width="262" height="482" />
+        </ContentLoader>
       ) : (
         <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none', color: 'white' }}>
           <div className={classes.cards}>

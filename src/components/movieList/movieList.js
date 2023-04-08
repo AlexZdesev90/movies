@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import classes from './movieList.module.css';
-import Cards from '../card/card';
+import Card from '../card/card';
 import { GET_POPULAR_MOVIES } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,7 +19,7 @@ const MovieList = ({ setNewTotalPages }) => {
 
   useEffect(() => {
     getData(searchValue);
-  }, [searchValue, `${searchValue === '' ? currentPage : ''}`]);
+  }, [searchValue, `${searchValue !== '' ? currentPage : ''}`]);
 
   const getData = useCallback(
     (searchValue) => {
@@ -33,9 +33,11 @@ const MovieList = ({ setNewTotalPages }) => {
         .then((data) => {
           dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
           setNewTotalPages(data.total_pages);
+          // setNewTotalPages(data.total_pages);
+          console.log('data', data.results)
         });
     },
-    [`${searchValue !== '' ? currentPage : ''}`],
+    [`${searchValue.length > 0 ? currentPage : ''}`],
   );
 
   return (
@@ -43,7 +45,7 @@ const MovieList = ({ setNewTotalPages }) => {
       <h2 className={classes.list__title}>MOVIES</h2>
       <div className={classes.list__cards}>
         {movies?.map((movie) => (
-          <Cards key={movie.id} movie={movie} />
+          <Card key={movie.id} movie={movie} />
         ))}
       </div>
     </div>

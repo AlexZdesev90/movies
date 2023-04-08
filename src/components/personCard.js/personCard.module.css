@@ -1,9 +1,10 @@
 .image_wrapper {
-    width: 300px;
+    width: 200px;
     height: auto;
     margin: 5px;
     overflow: hidden;
     border-radius: 10px;
+    box-shadow: 6px 6px 4px rgba(0,0,0,0.5);
 }  
 
 .image_wrapper > img {

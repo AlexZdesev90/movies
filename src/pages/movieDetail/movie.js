@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import classes from './movie.module.css';
 import { useParams } from 'react-router-dom';
+import { Loader } from '../../components/Loader/Loader';
 
 const Movie = () => {
   const [currentMovieDetail, setMovie] = useState();
+  const [isLoading, setLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -16,9 +18,13 @@ const Movie = () => {
       `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`,
     )
       .then((res) => res.json())
-      .then((data) => setMovie(data));
+      .then((data) => {
+        setMovie(data);
+        setLoading(false);
+      });
   };
 
+  if (isLoading) return <Loader />;
   return (
     <div className={classes.movie}>
       <div className={classes.movie__intro}>
@@ -51,7 +57,8 @@ const Movie = () => {
               {currentMovieDetail ? currentMovieDetail.tagline : ''}
             </div>
             <div className={classes.movie__rating}>
-              {currentMovieDetail ? currentMovieDetail.vote_average : ''} <i className="fas fa-star" />
+              {currentMovieDetail ? currentMovieDetail.vote_average : ''}{' '}
+              <i className="fas fa-star" />
               <span className={classes.movie__voteCount}>
                 {currentMovieDetail ? '(' + currentMovieDetail.vote_count + ') votes' : ''}
               </span>
@@ -66,7 +73,7 @@ const Movie = () => {
               {currentMovieDetail && currentMovieDetail.genres
                 ? currentMovieDetail.genres.map((genre) => (
                     <>
-                      <span className={classes.movie__genre} id={genre.id}>
+                      <span key={genre} className={classes.movie__genre} id={genre.id}>
                         {genre.name}
                       </span>
                     </>

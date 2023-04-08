@@ -1,11 +1,13 @@
-import './App.css';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 import Header from './components/header/Header';
 import Home from './pages/home/home';
-import Movie from './pages/movieDetail/movie';
 import Person from './pages/person/person';
-import PersonDetail from './pages/personDetail/personDetail';
 import { Error } from './pages/error/error';
+
+const PersonDetail = lazy(() => import('./pages/personDetail/personDetail'));
+const Movie = lazy(() => import('./pages/movieDetail/movie'));
 
 function App() {
   return (
@@ -14,9 +16,15 @@ function App() {
         <Header />
         <Routes>
           <Route index element={<Home />}></Route>
-          <Route path="movie/:id" element={<Movie />}></Route>
+          <Route path="movie/:id" element={(<Suspense>
+          <Movie/>
+          </Suspense>)}>
+          </Route>
           <Route path="person" element={<Person />}></Route>
-          <Route path="person/:id" element={<PersonDetail />}></Route>
+          <Route path="person/:id" element={(
+          <Suspense>
+          <PersonDetail />
+          </Suspense>)}></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </Router>

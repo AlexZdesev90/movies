@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import classes from './personList.module.css';
 import PersonCard from '../personCard.js/personCard';
+// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+// import { Link } from 'react-router-dom';
 
 const PersonList = ({ searchValue, currentPage, setNewTotalPages, popularPersons }) => {
   const [personList, setPersonList] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
+
   useEffect(() => {
     setPersonList(popularPersons);
   }, [popularPersons]);
-
   
   const queryString = (searchValue) => (searchValue !== '' ? `?query=${searchValue}&` : '?');
   
@@ -32,7 +41,7 @@ const PersonList = ({ searchValue, currentPage, setNewTotalPages, popularPersons
       <h2 className={classes.person__title}>ACTORS</h2>
       <div className={classes.person__cards}>
         {personList?.map((person) => (
-          <PersonCard key={person.name} person={person} />
+          <PersonCard isLoading={isLoading} key={person.name} person={person} />
         ))}
       </div>
     </div>

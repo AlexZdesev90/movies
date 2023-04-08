@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import classes from './personDetail.module.css';
 import { useParams } from 'react-router-dom';
+import { Loader } from '../../components/Loader/Loader';
 
 const PersonDetail = () => {
   const [currentPerson, setPerson] = useState();
   const [currentImages, setImages] = useState([]);
   const [pickImage, setPickImage] = useState(0);
+  const [isLoading, setLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -16,7 +18,10 @@ const PersonDetail = () => {
   const getData = () => {
     fetch(`https://api.themoviedb.org/3/person/${id}?api_key=5058efa201f4ad4fba59a8deb39502b3`)
       .then((res) => res.json())
-      .then((data) => setPerson(data));
+      .then((data) => {
+        setPerson(data);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -25,14 +30,13 @@ const PersonDetail = () => {
     )
       .then((res) => res.json())
       .then((data) => setImages(data.profiles));
-    // .then(data => setImages(data.profiles[1].file_path))
   }, []);
 
   const onClickSetImage = (id) => {
     setPickImage(id);
   };
 
-
+  if (isLoading) return <Loader />;
   return (
     <div className={classes.wrapper}>
       <div className={classes.main_image}>

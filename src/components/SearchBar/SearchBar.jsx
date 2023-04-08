@@ -9,7 +9,7 @@ export const SearchBar = ({searchValue, onChangeSearchValue}) => {
       <div className={classes.finder__outer}>
         <div className={classes.finder__inner}>
           <div className={classes.finder__icon}></div>
-          <input className={classes.finder__input} value={searchValue} type="text" onChange={(e) => onChangeSearchValue(e.target.value)}/>
+          <input className={classes.finder__input} value={searchValue} type="text" onChange={(e) => onChangeSearchValue(e.target.value)} placeholder="Search..." />
         </div>
       </div>
     </div>

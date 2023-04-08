@@ -1,12 +1,28 @@
 .personImage {
-  margin: 0 auto;
-  width: 30%;
+  margin: 10px auto;
+  padding: 15px;
+  width: 25%;
+  background-color: rgb(81, 3, 35);
 }
 
 .personImage__name {
-  font-size: 4rem;
+  font-size: 3rem;
   width: 100%;
   margin: 0 auto;
+}
+
+.wrapper {
+  width: 90%;
+  box-shadow: 6px 6px 4px rgba(0,0,0,0.5);
+  background-color: #6e0e3e;
+  margin: 0 auto;
+}
+
+.paginationWrapper {
+  background: linear-gradient(10deg,#ffffff, #aba9aa);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
 }
 
 .person__overlay {
@@ -47,8 +63,20 @@
   -moz-text-fill-color: transparent;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1200px) {
   .personImage__name {
-    font-size: 1rem;
+    font-size: 4rem;
+  }
+  .personImage {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .personImage__name {
+    font-size: 4rem;
+  }
+  .personImage {
+    width: 90%;
   }
 }
