@@ -4,8 +4,8 @@ import actorReducer from './reducers/actorReducer';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
-    movies: movieReducer,
-    actors: actorReducer,
-})
+  movies: movieReducer,
+  actors: actorReducer,
+});
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

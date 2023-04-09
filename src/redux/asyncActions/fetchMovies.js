@@ -1,4 +1,4 @@
-import { GET_POPULAR_MOVIES, SET_TOTAL_PAGES } from '../actions';
+import { getPopularMoviesActionCreator, setTotalPagesActionCreator } from '../actions';
 
 export const fetchMovies = (currentPage, filter) => {
   return (dispatch) => {
@@ -7,8 +7,8 @@ export const fetchMovies = (currentPage, filter) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
-        dispatch({ type: SET_TOTAL_PAGES, payload: data.total_pages });
+        dispatch(getPopularMoviesActionCreator(data.results));
+        dispatch(setTotalPagesActionCreator(data.total_pages));
       });
   };
 };

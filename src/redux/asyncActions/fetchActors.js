@@ -1,4 +1,4 @@
-import { GET_POPULAR_ACTORS, SET_TOTAL_PAGES_ACTOR } from '../actions';
+import { getActorsActionCreator, setTotalPagesActorActionCreator } from '../actions';
 
 export const fetchActors = (currentPage) => {
   return (dispatch) => {
@@ -7,8 +7,8 @@ export const fetchActors = (currentPage) => {
     )
       .then((res) =>  res.json())
       .then((data) => {
-        dispatch({ type: GET_POPULAR_ACTORS, payload: data.results });
-        dispatch({ type: SET_TOTAL_PAGES_ACTOR, payload: data.total_pages });
+        dispatch(getActorsActionCreator(data.results));
+        dispatch(setTotalPagesActorActionCreator(data.total_pages));
       });
   };
 };

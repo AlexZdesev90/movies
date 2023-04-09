@@ -8,11 +8,11 @@
 }
 
 .mainLinks {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
 }
 
 .title {
@@ -83,16 +83,16 @@ a > span:hover {
   }
   .mainLinks {
     width: 100%;
-}
-.title {
+  }
+  .title {
     padding: 30px;
     flex-wrap: wrap;
     text-align: center;
-}
+  }
 }
 
 @media screen and (max-width: 600px) {
-.title {
-  font-size: 30px;
-}
+  .title {
+    font-size: 30px;
+  }
 }

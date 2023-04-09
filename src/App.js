@@ -16,15 +16,23 @@ function App() {
         <Header />
         <Routes>
           <Route index element={<Home />}></Route>
-          <Route path="movie/:id" element={(<Suspense>
-          <Movie/>
-          </Suspense>)}>
-          </Route>
+          <Route
+            path="movie/:id"
+            element={
+              <Suspense>
+                <Movie />
+              </Suspense>
+            }
+          ></Route>
           <Route path="person" element={<Person />}></Route>
-          <Route path="person/:id" element={(
-          <Suspense>
-          <PersonDetail />
-          </Suspense>)}></Route>
+          <Route
+            path="person/:id"
+            element={
+              <Suspense>
+                <PersonDetail />
+              </Suspense>
+            }
+          ></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </Router>

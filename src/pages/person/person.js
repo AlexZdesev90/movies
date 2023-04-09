@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom';
@@ -8,16 +8,15 @@ import debounce from 'lodash.debounce';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Pagination, Grid } from '@mui/material';
 import {
-  SET_CURRENT_PAGE_ACTOR,
-  CHANGE_SEARCH_VALUE_ACTOR,
-  CHANGE_FILTERED_VALUE_ACTOR,
-  SET_TOTAL_PAGES_ACTOR,
+  changeFiltredValueActorsActionCreator,
+  changeSearchValueActorsCreator,
+  setCurrentPageActorsCreator,
+  setTotalPagesActorActionCreator,
 } from '../../redux/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchActors } from '../../redux/asyncActions/fetchActors';
 
 const Person = () => {
-
   const dispatch = useDispatch();
 
   const actors = useSelector((state) => state.actors.actors);
@@ -32,20 +31,20 @@ const Person = () => {
 
   const updateSearchValue = useCallback(
     debounce((value) => {
-      dispatch({ type: CHANGE_FILTERED_VALUE_ACTOR, payload: value });
+      dispatch(changeFiltredValueActorsActionCreator(value));
     }, 500),
     [],
   );
 
   const setNewTotalPages = (num) => {
-    dispatch({ type: SET_TOTAL_PAGES_ACTOR, payload: num });
+    dispatch(setTotalPagesActorActionCreator(num));
   };
 
   const onChangeSearchValue = (value) => {
-    if(value.length === 0) {
+    if (value.length === 0) {
       window.location.href = '/person';
     }
-    dispatch({ type: CHANGE_SEARCH_VALUE_ACTOR, payload: value });
+    dispatch(changeSearchValueActorsCreator(value));
     updateSearchValue(value);
   };
 
@@ -92,7 +91,7 @@ const Person = () => {
             <Pagination
               count={totalPages}
               page={currentPage}
-              onChange={(_, num) => dispatch({ type: SET_CURRENT_PAGE_ACTOR, payload: num })}
+              onChange={(_, num) => dispatch(setCurrentPageActorsCreator(num))}
               variant="outlined"
               color="primary"
             />

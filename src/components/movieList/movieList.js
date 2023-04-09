@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import classes from './movieList.module.css';
 import Card from '../card/card';
-import { GET_POPULAR_MOVIES, SET_TOTAL_PAGES } from '../../redux/actions';
+import { getPopularMoviesActionCreator, setTotalPagesActionCreator } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const MovieList = () => {
@@ -12,7 +12,7 @@ const MovieList = () => {
   const currentPage = useSelector((state) => state.movies.currentPage);
 
   useEffect(() => {
-    dispatch({ type: GET_POPULAR_MOVIES, payload: movies });
+    dispatch(getPopularMoviesActionCreator(movies));
   }, []);
 
   const queryString = (searchValue) => (searchValue !== '' ? `?query=${searchValue}&` : '?');
@@ -30,8 +30,8 @@ const MovieList = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
-          dispatch({ type: SET_TOTAL_PAGES, payload: data.total_pages });
+          dispatch(getPopularMoviesActionCreator(data.results));
+          dispatch(setTotalPagesActionCreator(data.total_pages));
         });
     },
     [`${searchValue.length > 0 ? currentPage : ''}`],

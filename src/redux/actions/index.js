@@ -11,3 +11,16 @@ export const SET_CURRENT_PAGE_ACTOR = "SET_CURRENT_PAGE_ACTOR";
 export const CHANGE_SEARCH_VALUE_ACTOR = "CHANGE_SEARCH_VALUE_ACTOR";
 export const CHANGE_FILTERED_VALUE_ACTOR = "CHANGE_FILTERED_VALUE_ACTOR";
 export const CHANGE_LOADING_ACTORS = "CHANGE_LOADING_ACTORS";
+
+export const getPopularMoviesActionCreator = movies => ({type: GET_POPULAR_MOVIES, payload: movies});
+export const setCurrentPageActionCreator = pageNumber => ({type: SET_CURRENT_PAGE, payload: pageNumber});
+export const changeSearchValueActionCreator = searchValue => ({type: CHANGE_SEARCH_VALUE, payload: searchValue});
+export const setTotalPagesActionCreator = totalPages => ({type: SET_TOTAL_PAGES, payload: totalPages});
+export const changeFiltredValueActionCreator = filtredValue => ({type: CHANGE_FILTERED_VALUE, payload: filtredValue});
+export const setFilterActionCreator = value => ({type: SET_FILTER, payload: value});
+
+export const getActorsActionCreator = actors => ({type: GET_POPULAR_ACTORS, payload: actors});
+export const setCurrentPageActorsCreator = pageNumber => ({type: SET_CURRENT_PAGE_ACTOR, payload: pageNumber});
+export const changeSearchValueActorsCreator = searchValue => ({type: CHANGE_SEARCH_VALUE_ACTOR, payload: searchValue});
+export const setTotalPagesActorActionCreator = totalPages => ({type: SET_TOTAL_PAGES_ACTOR, payload: totalPages});
+export const changeFiltredValueActorsActionCreator = filtredValue => ({type: CHANGE_FILTERED_VALUE_ACTOR, payload: filtredValue});

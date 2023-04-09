@@ -9,11 +9,10 @@ import debounce from 'lodash.debounce';
 import { Pagination, Grid } from '@mui/material';
 import { DropDown } from '../../components/dropDownMenu/DropDown';
 import {
-  SET_CURRENT_PAGE,
-  CHANGE_SEARCH_VALUE,
-  CHANGE_FILTERED_VALUE,
-  SET_FILTER,
-  GET_POPULAR_MOVIES,
+  changeFiltredValueActionCreator,
+  changeSearchValueActionCreator,
+  setCurrentPageActionCreator,
+  setFilterActionCreator,
 } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovies } from '../../redux/asyncActions/fetchMovies';
@@ -33,23 +32,23 @@ const Home = () => {
 
   const updateSearchValue = useCallback(
     debounce((value) => {
-      dispatch({ type: CHANGE_SEARCH_VALUE, payload: value });
+      dispatch(changeSearchValueActionCreator(value));
     }, 500),
     [],
   );
 
   const onChangeSearchValue = (value) => {
-    if(value.length === 0) {
+    if (value.length === 0) {
       window.location.href = '/';
     }
-    dispatch({ type: CHANGE_FILTERED_VALUE, payload: value });
+    dispatch(changeFiltredValueActionCreator(value));
     updateSearchValue(value);
   };
 
   const onClickChanged = (value) => {
-    dispatch({ type: SET_FILTER, payload: value });
-    dispatch({ type: CHANGE_SEARCH_VALUE, payload: '' });
-    dispatch({ type: CHANGE_FILTERED_VALUE, payload: '' });
+    dispatch(setFilterActionCreator(value.split(' ').join('_')));
+    dispatch(changeSearchValueActionCreator(''));
+    dispatch(changeFiltredValueActionCreator(''));
   };
 
   return (
@@ -88,14 +87,13 @@ const Home = () => {
           <SearchBar searchValue={filteredValue} onChangeSearchValue={onChangeSearchValue} />
           <DropDown filter={filter} onClickChanged={onClickChanged} />
         </div>
-        <MovieList
-        />
+        <MovieList />
         <Grid container justifyContent="center" sx={{ p: '1.8rem' }}>
           <div className={classes.paginationWrapper}>
             <Pagination
               count={totalPages}
               page={currentPage}
-              onChange={(_, num) => dispatch({ type: SET_CURRENT_PAGE, payload: num })}
+              onChange={(_, num) => dispatch(setCurrentPageActionCreator(num))}
               variant="outlined"
               color="secondary"
             />

@@ -1,21 +1,17 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import classes from './personList.module.css';
 import PersonCard from '../personCard.js/personCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { CHANGE_LOADING_ACTORS, GET_POPULAR_ACTORS } from '../../redux/actions';
+import { getActorsActionCreator } from '../../redux/actions';
 
-const PersonList = ({
-  setNewTotalPages,
-   popularPersons
-}) => {
+const PersonList = ({ setNewTotalPages, popularPersons }) => {
   const dispatch = useDispatch();
   const actors = useSelector((state) => state.actors.actors);
   const currentPage = useSelector((state) => state.actors.currentPageActors);
   const filteredValue = useSelector((state) => state.actors.filteredValueActors);
 
   useEffect(() => {
-    // setPersonList(popularPersons);
-    dispatch({ type: GET_POPULAR_ACTORS, payload: popularPersons });
+    dispatch(getActorsActionCreator(popularPersons));
   }, []);
 
   const queryString = (filteredValue) => (filteredValue !== '' ? `?query=${filteredValue}&` : '?');
@@ -28,8 +24,7 @@ const PersonList = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        // setPersonList(data.results);
-        dispatch({ type: GET_POPULAR_ACTORS, payload: data.results });
+        dispatch(getActorsActionCreator(data.results));
         setNewTotalPages(data.total_pages);
       });
   };
@@ -43,9 +38,7 @@ const PersonList = ({
       <h2 className={classes.person__title}>ACTORS</h2>
       <div className={classes.person__cards}>
         {actors?.map((person) => (
-          <PersonCard 
-          // isLoading={isLoading}
-           key={person.name} person={person} />
+          <PersonCard key={person.name} person={person} />
         ))}
       </div>
     </div>

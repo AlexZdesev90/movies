@@ -20,7 +20,7 @@ const PersonDetail = () => {
       .then((res) => res.json())
       .then((data) => {
         setPerson(data);
-        setLoading(false)
+        setLoading(false);
       });
   };
 
