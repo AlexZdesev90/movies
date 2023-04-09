@@ -20,7 +20,7 @@ const PersonDetail = () => {
       .then((res) => res.json())
       .then((data) => {
         setPerson(data);
-        setLoading(false);
+        setLoading(false)
       });
   };
 
@@ -46,9 +46,7 @@ const PersonDetail = () => {
           alt="main_img"
         />
         <div className={classes.description}>
-          <div className={classes.description__name}>
-            {currentPerson ? currentPerson.name : ''}
-          </div>
+          <div className={classes.description__name}>{currentPerson ? currentPerson.name : ''}</div>
           <div className={classes.description__item}>
             {currentPerson ? currentPerson.birthday : ''}
           </div>
@@ -68,7 +66,7 @@ const PersonDetail = () => {
         {currentImages?.map((item, id) => (
           <div className={classes.frame}>
             <img
-            key={item}
+              key={item}
               onClick={() => onClickSetImage(id)}
               src={`https://image.tmdb.org/t/p/original${item.file_path}`}
               width={50}

@@ -3,7 +3,25 @@ import classes from './personCard.module.css';
 import { Link } from 'react-router-dom';
 import ContentLoader from 'react-content-loader';
 
-const PersonCard = ({ isLoading, person, currentPage }) => {
+const PersonCard = ({ 
+  // isLoading,
+   person,
+    // currentPage 
+  }) => {
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 1500);
+  // }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
 
   return (
     <>

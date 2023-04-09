@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom';
@@ -8,15 +8,17 @@ import debounce from 'lodash.debounce';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Pagination, Grid } from '@mui/material';
 import {
-  GET_POPULAR_ACTORS,
   SET_TOTAL_PAGES_ACTOR,
   SET_CURRENT_PAGE_ACTOR,
   CHANGE_SEARCH_VALUE_ACTOR,
   CHANGE_FILTERED_VALUE_ACTOR,
 } from '../../redux/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchActors } from '../../redux/asyncActions/fetchActors';
 
 const Person = () => {
+
+  const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   const actors = useSelector((state) => state.actors.actors);
@@ -26,15 +28,8 @@ const Person = () => {
   const totalPages = useSelector((state) => state.actors.totalPagesActors);
 
   useEffect(() => {
-    console.log('person');
-    fetch(
-      `https://api.themoviedb.org/3/person/popular?page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: SET_TOTAL_PAGES_ACTOR, payload: data.total_pages });
-        dispatch({ type: GET_POPULAR_ACTORS, payload: data.results });
-      });
+    dispatch(fetchActors(currentPage));
+    setLoading(false)
   }, [currentPage]);
 
   const updateSearchValue = useCallback(
@@ -52,7 +47,7 @@ const Person = () => {
     dispatch({ type: CHANGE_SEARCH_VALUE_ACTOR, payload: value });
     updateSearchValue(value);
   };
-  console.log(currentPage);
+
   return (
     <>
       <div className={classes.poster}>
@@ -60,8 +55,6 @@ const Person = () => {
           <Carousel
             showThumbs={false}
             autoPlay={true}
-            // transitionTime={3}
-            // infiniteLoop={true}
             showStatus={false}
             showArrows={true}
             showIndicators={true}
@@ -89,7 +82,7 @@ const Person = () => {
         <PersonList
           searchValue={filteredValue}
           currentPage={currentPage}
-          setNewTotalPages={setNewTotalPages}
+          setNewTotalPages={(num) => setNewTotalPages(num)}
           popularPersons={actors}
         />
 

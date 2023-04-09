@@ -3,6 +3,8 @@ import classes from './Loader.module.css'
 
 export const Loader = () => {
   return (
-    <div className={classes.loading}></div>
+    <div className={classes.wrapper}>
+      <div className={classes.loading}></div>
+    </div>
   )
 }

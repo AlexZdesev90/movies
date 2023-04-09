@@ -5,10 +5,8 @@
   border-right-color: #850840;
   border-radius: 50%;
   animation: rotate 1s infinite linear;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: 0 auto;
+  position: relative;
+  margin: 50px auto;
 }
 
 @keyframes rotate {

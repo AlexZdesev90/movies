@@ -23,7 +23,6 @@ const MovieList = ({ setNewTotalPages }) => {
 
   const getData = useCallback(
     (searchValue) => {
-      console.log('movielist');
       fetch(
         `https://api.themoviedb.org/3/search/movie${queryString(
           searchValue,
@@ -34,7 +33,6 @@ const MovieList = ({ setNewTotalPages }) => {
           dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
           setNewTotalPages(data.total_pages);
           // setNewTotalPages(data.total_pages);
-          console.log('data', data.results)
         });
     },
     [`${searchValue.length > 0 ? currentPage : ''}`],

@@ -15,7 +15,7 @@ const Movie = () => {
 
   const getData = () => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`,
+      `https://api.themoviedb.org/3/movie/${id}?api_key=5058efa201f4ad4fba59a8deb39502b3`,
     )
       .then((res) => res.json())
       .then((data) => {

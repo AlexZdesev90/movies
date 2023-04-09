@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classes from './home.module.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
@@ -9,7 +9,6 @@ import debounce from 'lodash.debounce';
 import { Pagination, Grid } from '@mui/material';
 import { DropDown } from '../../components/dropDownMenu/DropDown';
 import {
-  GET_POPULAR_MOVIES,
   SET_CURRENT_PAGE,
   SET_TOTAL_PAGES,
   CHANGE_SEARCH_VALUE,
@@ -17,9 +16,11 @@ import {
   SET_FILTER,
 } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Loader } from '../../components/Loader/Loader';
+import { fetchMovies } from '../../redux/asyncActions/fetchMovies';
 
 const Home = () => {
+
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
 
   const movies = useSelector((state) => state.movies.movies);
@@ -29,17 +30,22 @@ const Home = () => {
   const filter = useSelector((state) => state.movies.filter);
   const filteredValue = useSelector((state) => state.movies.filteredValue);
 
+  // useEffect(() => {
+  //   console.log('home');
+  //   fetch(
+  //     `https://api.themoviedb.org/3/movie/${filter}?page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
+  //       dispatch({ type: SET_TOTAL_PAGES, payload: data.total_pages });
+  //       console.log(data.results);
+  //     });
+  // }, [filter, currentPage]);
   useEffect(() => {
-    console.log('home');
-    fetch(
-      `https://api.themoviedb.org/3/movie/${filter}?page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
-        dispatch({ type: SET_TOTAL_PAGES, payload: data.total_pages });
-        console.log(data.results);
-      });
+    setIsLoading(true)
+    dispatch(fetchMovies(currentPage, filter));
+    setIsLoading(false)
   }, [filter, currentPage]);
 
   const updateSearchValue = useCallback(
@@ -106,18 +112,19 @@ const Home = () => {
           // searchValue={filteredValue}
           // currentPage={currentPage}
           setNewTotalPages={(num) => setNewTotalPages(num)}
+          isLoading={isLoading}
           // popularMovies={movies}
         />
         <Grid container justifyContent="center" sx={{ p: '1.8rem' }}>
           <div className={classes.paginationWrapper}>
-          <Pagination
-          className={classes.root}
-            count={totalPages}
-            page={currentPage}
-            onChange={(_, num) => dispatch({ type: SET_CURRENT_PAGE, payload: num })}
-            variant="outlined"
-            color="secondary"
-          />
+            <Pagination
+              // className={classes.root}
+              count={totalPages}
+              page={currentPage}
+              onChange={(_, num) => dispatch({ type: SET_CURRENT_PAGE, payload: num })}
+              variant="outlined"
+              color="secondary"
+            />
           </div>
         </Grid>
       </div>
