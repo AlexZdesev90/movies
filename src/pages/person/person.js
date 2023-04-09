@@ -8,29 +8,27 @@ import debounce from 'lodash.debounce';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Pagination, Grid } from '@mui/material';
 import {
-  SET_TOTAL_PAGES_ACTOR,
   SET_CURRENT_PAGE_ACTOR,
   CHANGE_SEARCH_VALUE_ACTOR,
   CHANGE_FILTERED_VALUE_ACTOR,
+  SET_TOTAL_PAGES_ACTOR,
 } from '../../redux/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchActors } from '../../redux/asyncActions/fetchActors';
 
 const Person = () => {
 
-  const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   const actors = useSelector((state) => state.actors.actors);
   const currentPage = useSelector((state) => state.actors.currentPageActors);
   const searchValue = useSelector((state) => state.actors.searchValueActors);
-  const filteredValue = useSelector((state) => state.actors.filteredValueActors);
   const totalPages = useSelector((state) => state.actors.totalPagesActors);
+  const filteredValue = useSelector((state) => state.actors.filteredValueActors);
 
   useEffect(() => {
     dispatch(fetchActors(currentPage));
-    setLoading(false)
-  }, [currentPage]);
+  }, [`${searchValue === '' ? currentPage : ''}`]);
 
   const updateSearchValue = useCallback(
     debounce((value) => {
@@ -44,6 +42,9 @@ const Person = () => {
   };
 
   const onChangeSearchValue = (value) => {
+    if(value.length === 0) {
+      window.location.href = '/person';
+    }
     dispatch({ type: CHANGE_SEARCH_VALUE_ACTOR, payload: value });
     updateSearchValue(value);
   };

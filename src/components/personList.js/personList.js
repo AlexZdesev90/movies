@@ -1,63 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import classes from './personList.module.css';
 import PersonCard from '../personCard.js/personCard';
-// import {
-//   SET_TOTAL_PAGES_ACTOR,
-
-// } from '../../redux/actions/index';
-// import { useDispatch, useSelector } from 'react-redux';
-import { GET_POPULAR_ACTORS } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { CHANGE_LOADING_ACTORS, GET_POPULAR_ACTORS } from '../../redux/actions';
 
 const PersonList = ({
-  searchValue, currentPage,
   setNewTotalPages,
    popularPersons
 }) => {
-  const [personList, setPersonList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  // const dispatch = useDispatch();
-  // const actors = useSelector((state) => state.actors.actors);
-  // const currentPage = useSelector((state) => state.actors.currentPageActors);
-  // const searchValue = useSelector((state) => state.actors.searchValueActors);
-  // const filteredValue = useSelector((state) => state.actors.filteredValueActors);
-  // const totalPages = useSelector((state) => state.actors.totalPagesActors);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1500);
-  // }, []);
+  const dispatch = useDispatch();
+  const actors = useSelector((state) => state.actors.actors);
+  const currentPage = useSelector((state) => state.actors.currentPageActors);
+  const filteredValue = useSelector((state) => state.actors.filteredValueActors);
 
   useEffect(() => {
-    setPersonList(popularPersons);
-    // dispatch({ type: GET_POPULAR_ACTORS, payload: popularPersons });
-  }, [popularPersons]);
+    // setPersonList(popularPersons);
+    dispatch({ type: GET_POPULAR_ACTORS, payload: popularPersons });
+  }, []);
 
-  const queryString = (searchValue) => (searchValue !== '' ? `?query=${searchValue}&` : '?');
+  const queryString = (filteredValue) => (filteredValue !== '' ? `?query=${filteredValue}&` : '?');
 
   const getData = (currentPage) => {
     fetch(
       `https://api.themoviedb.org/3/search/person${queryString(
-        searchValue,
+        filteredValue,
       )}page=${currentPage}&api_key=5058efa201f4ad4fba59a8deb39502b3`,
     )
       .then((res) => res.json())
       .then((data) => {
-        setPersonList(data.results);
-        // dispatch({ type: GET_POPULAR_ACTORS, payload: data.results });
+        // setPersonList(data.results);
+        dispatch({ type: GET_POPULAR_ACTORS, payload: data.results });
         setNewTotalPages(data.total_pages);
       });
   };
 
   useEffect(() => {
     getData(currentPage);
-  }, [currentPage, searchValue]);
+  }, [currentPage, filteredValue]);
 
   return (
     <div className={classes.person__list}>
       <h2 className={classes.person__title}>ACTORS</h2>
       <div className={classes.person__cards}>
-        {personList?.map((person) => (
+        {actors?.map((person) => (
           <PersonCard 
           // isLoading={isLoading}
            key={person.name} person={person} />

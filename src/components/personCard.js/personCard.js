@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './personCard.module.css';
 import { Link } from 'react-router-dom';
 import ContentLoader from 'react-content-loader';
+import logo from '../../assets/2151863.jpg.png';
 
 const PersonCard = ({ 
   // isLoading,
@@ -9,19 +10,13 @@ const PersonCard = ({
     // currentPage 
   }) => {
 
-  const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1500);
-  // }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-  }, []);
+    useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    }, []);
 
   return (
     <>
@@ -43,11 +38,16 @@ const PersonCard = ({
         >
           {person.name}
           <div className={classes.image_wrapper}>
-            <img
+            {person.profile_path ? <img
               className={classes.img}
               src={`https://image.tmdb.org/t/p/original${person && person.profile_path}`}
               alt="pict"
-            />
+            /> : <img
+            className={classes.img}
+            src={logo}
+            alt="pict"
+          /> }
+            
           </div>
         </Link>
       )}

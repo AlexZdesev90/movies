@@ -1,6 +1,6 @@
 .image_wrapper {
     width: 200px;
-    height: auto;
+    min-height: 300px;
     margin: 5px;
     overflow: hidden;
     border-radius: 10px;
@@ -8,7 +8,8 @@
 }  
 
 .image_wrapper > img {
-    width:100%;
+    width:200px;
+    height: 300px;
 } 
 
 .img {

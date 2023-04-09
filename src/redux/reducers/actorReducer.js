@@ -1,4 +1,4 @@
-import { GET_POPULAR_ACTORS, SET_TOTAL_PAGES_ACTOR, SET_CURRENT_PAGE_ACTOR, CHANGE_SEARCH_VALUE_ACTOR, CHANGE_FILTERED_VALUE_ACTOR } from "../actions";
+import { GET_POPULAR_ACTORS, SET_TOTAL_PAGES_ACTOR, SET_CURRENT_PAGE_ACTOR, CHANGE_SEARCH_VALUE_ACTOR, CHANGE_FILTERED_VALUE_ACTOR, CHANGE_LOADING_ACTORS } from "../actions";
 
 const defaultState = {
     actors: [],
@@ -6,6 +6,7 @@ const defaultState = {
     totalPagesActors: 500,
     searchValueActors: '',
     filteredValueActors: '',
+    isLoading: true,
 }
 
 const actorReducer = (state = defaultState, action) => {
@@ -20,6 +21,8 @@ const actorReducer = (state = defaultState, action) => {
             return { ...state, searchValueActors: action.payload };
         case CHANGE_FILTERED_VALUE_ACTOR:
             return { ...state, filteredValueActors: action.payload };
+        case CHANGE_LOADING_ACTORS:
+            return { ...state, isLoading: action.payload };
         default: 
             return state;
     }

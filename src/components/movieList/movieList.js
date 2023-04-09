@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import classes from './movieList.module.css';
 import Card from '../card/card';
-import { GET_POPULAR_MOVIES } from '../../redux/actions';
+import { GET_POPULAR_MOVIES, SET_TOTAL_PAGES } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const MovieList = ({ setNewTotalPages }) => {
+const MovieList = () => {
   const dispatch = useDispatch();
 
   const movies = useSelector((state) => state.movies.movies);
@@ -31,8 +31,7 @@ const MovieList = ({ setNewTotalPages }) => {
         .then((res) => res.json())
         .then((data) => {
           dispatch({ type: GET_POPULAR_MOVIES, payload: data.results });
-          setNewTotalPages(data.total_pages);
-          // setNewTotalPages(data.total_pages);
+          dispatch({ type: SET_TOTAL_PAGES, payload: data.total_pages });
         });
     },
     [`${searchValue.length > 0 ? currentPage : ''}`],
