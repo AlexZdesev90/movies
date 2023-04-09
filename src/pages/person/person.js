@@ -59,9 +59,9 @@ const Person = () => {
         <div className={classes.wrapper}>
           <Carousel
             showThumbs={false}
-            autoPlay
-            transitionTime={1}
-            infiniteLoop={true}
+            autoPlay={true}
+            // transitionTime={3}
+            // infiniteLoop={true}
             showStatus={false}
             showArrows={true}
             showIndicators={true}

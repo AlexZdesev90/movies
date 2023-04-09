@@ -70,9 +70,9 @@ const Home = () => {
         <div className={classes.sliderContainer}>
           <Carousel
             showThumbs={false}
-            autoPlay
-            transitionTime={1}
-            infiniteLoop={true}
+            autoPlay={true}
+            // transitionTime={3}
+            // infiniteLoop={true}
             showStatus={false}
             showArrows={true}
             showIndicators={true}
@@ -108,7 +108,7 @@ const Home = () => {
           setNewTotalPages={(num) => setNewTotalPages(num)}
           // popularMovies={movies}
         />
-        <Grid container justifyContent="center" sx={{ p: '2rem' }}>
+        <Grid container justifyContent="center" sx={{ p: '1.8rem' }}>
           <div className={classes.paginationWrapper}>
           <Pagination
           className={classes.root}

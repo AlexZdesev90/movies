@@ -76,10 +76,6 @@
     font-size: 3rem;
 }
 
-.frame {
-    /* overflow: hidden; */
-}
-
 .pick {
     cursor: pointer;
     transition: scale 0.4s ease;

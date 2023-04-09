@@ -1,15 +1,14 @@
 .loading {
-  position: relative;
-  height: 200px;
-  width: 200px;
-  padding: 15px;
-  border: 26px solid #300404;
+  height: 50px;
+  width: 50px;
+  border: 16px solid #300404;
   border-right-color: #850840;
   border-radius: 50%;
   animation: rotate 1s infinite linear;
   position: absolute;
   left: 50%;
   top: 50%;
+  margin: 0 auto;
 }
 
 @keyframes rotate {
