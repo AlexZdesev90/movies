@@ -87,7 +87,7 @@ const Home = () => {
           <SearchBar searchValue={filteredValue} onChangeSearchValue={onChangeSearchValue} />
           <DropDown filter={filter} onClickChanged={onClickChanged} />
         </div>
-        <MovieList />
+          <MovieList />
         <Grid container justifyContent="center" sx={{ p: '1.8rem' }}>
           <div className={classes.paginationWrapper}>
             <Pagination

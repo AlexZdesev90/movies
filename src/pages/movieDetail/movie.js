@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classes from './movie.module.css';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/Loader/Loader';
+import ErrorImg from '../../assets/2151863.jpg.png';
 
 const Movie = () => {
   const [currentMovieDetail, setMovie] = useState();
@@ -12,7 +13,7 @@ const Movie = () => {
     getData();
     window.scrollTo(0, 0);
   }, []);
-
+  
   const getData = () => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5058efa201f4ad4fba59a8deb39502b3`)
       .then((res) => res.json())
@@ -21,18 +22,22 @@ const Movie = () => {
         setLoading(false);
       });
   };
-
   if (isLoading) return <Loader />;
   return (
     <div className={classes.movie}>
       <div className={classes.movie__intro}>
+        {currentMovieDetail.backdrop_path ? 
         <img
           className={classes.movie__backdrop}
           src={`https://image.tmdb.org/t/p/original${
             currentMovieDetail ? currentMovieDetail.backdrop_path : ''
           }`}
           alt="movie"
-        />
+        /> :  <img
+        className={classes.movie__backdrop}
+        src={ErrorImg}
+        alt="movie"
+      />}
       </div>
       <div className={classes.movie__detail}>
         <div className={classes.movie__detailLeft}>

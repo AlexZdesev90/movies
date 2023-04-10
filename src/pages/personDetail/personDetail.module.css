@@ -15,6 +15,7 @@
 
 .main_image > img {
   width: 200px;
+  border-radius: 50%;
 }
 
 .gallery {

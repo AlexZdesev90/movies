@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classes from './personDetail.module.css';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/Loader/Loader';
+import ErrorImg from '../../assets/2151863.jpg.png';
 
 const PersonDetail = () => {
   const [currentPerson, setPerson] = useState();
@@ -35,16 +36,21 @@ const PersonDetail = () => {
   const onClickSetImage = (id) => {
     setPickImage(id);
   };
-
+  
   if (isLoading) return <Loader />;
   return (
     <div className={classes.wrapper}>
       <div className={classes.main_image}>
-        <img
+        {currentImages[pickImage]?.file_path ?  <img
           src={`https://image.tmdb.org/t/p/original${currentImages[pickImage]?.file_path}`}
           width={500}
           alt="main_img"
-        />
+        /> : <img
+        src={ErrorImg}
+        width={500}
+        alt="main_img"
+      />}
+
         <div className={classes.description}>
           <div className={classes.description__name}>{currentPerson ? currentPerson.name : ''}</div>
           <div className={classes.description__item}>

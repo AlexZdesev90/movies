@@ -2,12 +2,14 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
-import Home from './pages/home/home';
-import Person from './pages/person/person';
 import { Error } from './pages/error/error';
+import ErrorBoundary from './components/ErrorBoundary';
+import { Loader } from './components/Loader/Loader';
 
 const PersonDetail = lazy(() => import('./pages/personDetail/personDetail'));
 const Movie = lazy(() => import('./pages/movieDetail/movie'));
+const Home = lazy(() => import('./pages/home/home'));
+const Person = lazy(() => import('./pages/person/person'));
 
 function App() {
   return (
@@ -15,22 +17,40 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route index element={<Home />}></Route>
           <Route
-            path="movie/:id"
+            index
             element={
-              <Suspense>
-                <Movie />
+              <Suspense fallback={<Loader />}>
+                <Home />
               </Suspense>
             }
           ></Route>
-          <Route path="person" element={<Person />}></Route>
+          <Route
+            path="movie/:id"
+            element={
+              <ErrorBoundary>
+                <Suspense>
+                  <Movie />
+                </Suspense>
+              </ErrorBoundary>
+            }
+          ></Route>
+          <Route
+            path="person"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Person />
+              </Suspense>
+            }
+          ></Route>
           <Route
             path="person/:id"
             element={
-              <Suspense>
-                <PersonDetail />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense>
+                  <PersonDetail />
+                </Suspense>
+              </ErrorBoundary>
             }
           ></Route>
           <Route path="/*" element={<Error />}></Route>
