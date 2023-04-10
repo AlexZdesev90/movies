@@ -18,7 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route
-            index
+            path="/"
             element={
               <Suspense fallback={<Loader />}>
                 <Home />
@@ -36,7 +36,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="person"
+            path="/person"
             element={
               <Suspense fallback={<Loader />}>
                 <Person />
