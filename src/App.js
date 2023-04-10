@@ -36,7 +36,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/person"
+            path="person"
             element={
               <Suspense fallback={<Loader />}>
                 <Person />

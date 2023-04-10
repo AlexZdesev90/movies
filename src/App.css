@@ -1,6 +1,6 @@
 .App {
   background: linear-gradient(#7c0e3a, #e189b5);
   color: white;
-  font-family: 'Pacifico', cursive;
+  /* font-family: 'Pacifico', cursive; */
   min-height: 100vh;
 }
