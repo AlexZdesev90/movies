@@ -38,9 +38,9 @@ const Home = () => {
   );
 
   const onChangeSearchValue = (value) => {
-    // if (value.length === 0) {
-    //   window.location.href = '/';
-    // }
+    if (value.length === 0) {
+      window.location.href = '/';
+    }
     dispatch(changeFiltredValueActionCreator(value));
     updateSearchValue(value);
   };
