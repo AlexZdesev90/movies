@@ -38,9 +38,11 @@ function App() {
           <Route
             path="person"
             element={
-              <Suspense fallback={<Loader />}>
-                <Person />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<Loader />}>
+                  <Person />
+                </Suspense>
+              </ErrorBoundary>
             }
           ></Route>
           <Route
@@ -53,7 +55,7 @@ function App() {
               </ErrorBoundary>
             }
           ></Route>
-          <Route path="/error" element={<Error />}></Route>
+          <Route path="/*" element={<Error />}></Route>
         </Routes>
       </Router>
     </div>

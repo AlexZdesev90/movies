@@ -41,9 +41,9 @@ const Person = () => {
   };
 
   const onChangeSearchValue = (value) => {
-    if (value.length === 0) {
-      window.location.href = '/';
-    }
+    // if (value.length === 0) {
+    //   window.location.href = '/';
+    // }
     dispatch(changeSearchValueActorsCreator(value));
     updateSearchValue(value);
   };
