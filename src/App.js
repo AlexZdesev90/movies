@@ -53,7 +53,7 @@ function App() {
               </ErrorBoundary>
             }
           ></Route>
-          <Route path="/*" element={<Error />}></Route>
+          <Route path="/error" element={<Error />}></Route>
         </Routes>
       </Router>
     </div>
