@@ -10,7 +10,7 @@ import {
 const defaultState = {
   movies: [],
   currentPage: 1,
-  totalPages: 37772,
+  totalPages: 500,
   searchValue: '',
   filteredValue: '',
   filter: 'popular',
@@ -23,6 +23,9 @@ const movieReducer = (state = defaultState, action) => {
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: action.payload };
     case SET_TOTAL_PAGES:
+      if (action.payload > 500) {
+        return { ...state, totalPages: 500 };
+      }
       return { ...state, totalPages: action.payload };
     case CHANGE_SEARCH_VALUE:
       return { ...state, searchValue: action.payload };

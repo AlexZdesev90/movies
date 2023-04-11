@@ -118,7 +118,8 @@
 .paginationWrapper {
   background: linear-gradient(10deg, #ffffff, #aba9aa);
   border-radius: 10px;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
 }
 

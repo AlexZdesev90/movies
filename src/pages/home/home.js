@@ -88,9 +88,10 @@ const Home = () => {
           <DropDown filter={filter} onClickChanged={onClickChanged} />
         </div>
           <MovieList />
-        <Grid container justifyContent="center" sx={{ p: '1.8rem' }}>
+        <Grid container justifyContent="center" sx={{ p: '0.2rem' }}>
           <div className={classes.paginationWrapper}>
             <Pagination
+            sx={{ margin: '0rem' }}
               count={totalPages}
               page={currentPage}
               onChange={(_, num) => dispatch(setCurrentPageActionCreator(num))}
